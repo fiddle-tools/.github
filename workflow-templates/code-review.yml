@@ -1,0 +1,11 @@
+name: Claude Code Review
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened, ready_for_review]
+        branches: [master, main]
+
+jobs:
+    review:
+        uses: fiddle-tools/.github/.github/workflows/claude-code-review.yml@main
+        secrets: inherit
