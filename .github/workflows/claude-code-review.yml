@@ -341,7 +341,7 @@ jobs:
                           echo "Retry update ($i)..."
                           sleep 2
                         done
-                        [ "$RESP" != "200" ] && { echo "Failed to update comment"; cat /tmp/update.json; }
+                        if [ "$RESP" != "200" ]; then echo "Failed to update comment"; cat /tmp/update.json || true; fi
                       else
                         echo "Creating comment on $FILE:$LINE"
                         PAYLOAD=$(jq -n \
@@ -362,7 +362,7 @@ jobs:
                           echo "Retry create ($i)..."
                           sleep 2
                         done
-                        [ "$RESP" != "201" ] && { echo "Failed to create comment"; cat /tmp/create.json; }
+                        if [ "$RESP" != "201" ]; then echo "Failed to create comment"; cat /tmp/create.json || true; fi
                       fi
                     done
                   done
